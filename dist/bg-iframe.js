@@ -25,7 +25,9 @@ var BgIframe = (function () {
         var width = currentOptions.width == BgIframe.OPTION_AUTO ? element.offsetWidth.toString() + "px" : currentOptions.width;
         var height = currentOptions.height == BgIframe.OPTION_AUTO ? element.offsetHeight.toString() + "px" : currentOptions.height;
         var iframe = document.createElement("iframe");
-        iframe.src = currentOptions.src;
+        if (currentOptions.src) {
+            iframe.src = currentOptions.src;
+        }
         iframe.setAttribute("frameborder", "0");
         iframe.setAttribute("tabindex", "-1");
         iframe.setAttribute("style", "display:block;position:absolute;z-index:-1;top:" + top + ";left:" + left + ";width:" + width + ";height:" + height + ";opacity:0;");
