@@ -1,0 +1,31 @@
+{
+  "name": "bgiframe-native",
+  "version": "1.0.0",
+  "description": "native implementation for bgiframe",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jetlogs/bgiframe-native.git"
+  },
+  "keywords": [
+    "bgiframe",
+    "flash",
+    "z-index",
+    "internet explorer",
+    "ie"
+  ],
+  "author": "Jet Fontanilla",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jetlogs/bgiframe-native/issues"
+  },
+  "homepage": "https://github.com/jetlogs/bgiframe-native#readme",
+  "devDependencies": {
+    "typescript": "2.5.3"
+  }
+}
