@@ -27,10 +27,18 @@ export class BgIframe {
         };
         let currentOptions: BgIframeOptions = Object.assign({}, DEFAULT_OPTIONS, options);
 
-        let top = currentOptions.top == BgIframe.OPTION_AUTO ? (0 - Math.round(element.clientTop || 0)).toString() + "px" : currentOptions.top;
-        let left = currentOptions.left == BgIframe.OPTION_AUTO ? (0 - Math.round(element.clientLeft || 0)).toString() + "px" : currentOptions.left;
-        let width = currentOptions.width ==  BgIframe.OPTION_AUTO ? element.offsetWidth.toString() + "px" : currentOptions.width;
-        let height = currentOptions.height ==  BgIframe.OPTION_AUTO ? element.offsetHeight.toString() + "px" : currentOptions.height;
+        let top = currentOptions.top == BgIframe.OPTION_AUTO || !currentOptions.top
+            ? BgIframe.numberToPixels(0 - Math.round(element.clientTop || 0))
+            : BgIframe.numberToPixels(currentOptions.top);
+        let left = currentOptions.left == BgIframe.OPTION_AUTO || !currentOptions.left
+            ? BgIframe.numberToPixels(0 - Math.round(element.clientLeft || 0))
+            : BgIframe.numberToPixels(currentOptions.left);
+        let width = currentOptions.width ==  BgIframe.OPTION_AUTO || !currentOptions.width
+            ? BgIframe.numberToPixels(element.offsetWidth)
+            : BgIframe.numberToPixels(currentOptions.width);
+        let height = currentOptions.height ==  BgIframe.OPTION_AUTO || !currentOptions.height
+            ? BgIframe.numberToPixels(element.offsetHeight)
+            : BgIframe.numberToPixels(currentOptions.height);
 
         let iframe = document.createElement("iframe");
         if (currentOptions.src) {
@@ -43,6 +51,21 @@ export class BgIframe {
         if (element.parentNode) {
             element.parentNode.insertBefore(iframe, element);
         }
+    }
+
+    private static numberToPixels(value: number | string): string {
+        if (typeof value === "number") {
+            if (Number.isFinite(value)) {
+                return value.toString() + "px";
+            }
+            return "0";
+        }
+
+        if (Number.isNaN(parseFloat(value))) {
+            return value;
+        }
+
+        return value + "px";
     }
 
     private static isInternetExplorer(): boolean {

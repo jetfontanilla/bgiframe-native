@@ -21,14 +21,13 @@ bgIframe.addBgIframe("ElementIdContainingFlash2", {width: "600px", height: "400p
 ```
 ## Options
 
-* `top` *(String)*: The iframe must be offset to the top by the width of the top border. This should be a negative number representing the border-top-width. If a number is used here, pixels will be assumed. Otherwise, be sure to specify a unit. An expression could also be used. By default the value is "auto" which will use the elements border top width as calculated by jQuery.
-* `left` *(String)*: The iframe must be offset to the left by the width of the left border. This should be a negative number representing the border-left-width. If a number is is used here, pixels will be assumed. Otherwise, be sure to specify a unit. An expression could also be used. By default the value is "auto" which will use the elements border left width as calculated by jQuery.
-* `width` *(String)*: This is the width of the iframe. If a number is used here, pixels will be assume. Otherwise, be sure to specify a unit. An expression could also be used. By default the value is "auto" which will the offsetWidth of the element.
-* `height` *(String)*: This is the height of the iframe. If a number is used here, pixels will be assume. Otherwise, be sure to specify a unit. An expression could also be used. By default the value is "auto" which will use the offsetHeight of the element.
-* `src` *(String)*: This setting is provided so that one could change  the src of the iframe to whatever they need. Default: "javascript:false;"
+* `top` *(number | string)*: The iframe must be offset to the top by the width of the top border. This should be a negative number representing the border-top-width. If a number is used here, pixels will be assumed. Otherwise, be sure to specify a unit. An expression could also be used. By default the value is "auto" which will use the elements border top width. If a number is passed, unit used will be in pixels.
+* `left` *(number | string)*: The iframe must be offset to the left by the width of the left border. This should be a negative number representing the border-left-width. If a number is is used here, pixels will be assumed. Otherwise, be sure to specify a unit. An expression could also be used. By default the value is "auto" which will use the elements border left width. If a number is passed, unit used will be in pixels.
+* `width` *(number | string)*: This is the width of the iframe. If a number is used here, pixels will be assume. Otherwise, be sure to specify a unit. An expression could also be used. By default the value is "auto" which will the offsetWidth of the element. If a number is passed, unit used will be in pixels.
+* `height` *(number | string)*: This is the height of the iframe. If a number is used here, pixels will be assume. Otherwise, be sure to specify a unit. An expression could also be used. By default the value is "auto" which will use the offsetHeight of the element. If a number is passed, unit used will be in pixels.
+* `src` *(string)*: This setting is provided so that one could change  the src of the iframe to whatever they need. Default: "javascript:false;"
 
 
 ## TODOs
 
 * only supports elementID for now, will add class selectors for next release
-* make options support both numbers and string, only accepts string for v1
