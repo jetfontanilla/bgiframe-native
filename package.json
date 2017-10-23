@@ -1,6 +1,6 @@
 {
   "name": "bgiframe-native",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "native implementation for bgiframe",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
