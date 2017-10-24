@@ -20,16 +20,16 @@ var BgIframe = (function () {
             src: "javascript:false;"
         };
         var currentOptions = Object.assign({}, DEFAULT_OPTIONS, options);
-        var top = currentOptions.top == BgIframe.OPTION_AUTO || !currentOptions.top
+        var top = currentOptions.top == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "top")
             ? BgIframe.numberToPixels(0 - Math.round(element.clientTop || 0))
             : BgIframe.numberToPixels(currentOptions.top);
-        var left = currentOptions.left == BgIframe.OPTION_AUTO || !currentOptions.left
+        var left = currentOptions.left == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "left")
             ? BgIframe.numberToPixels(0 - Math.round(element.clientLeft || 0))
             : BgIframe.numberToPixels(currentOptions.left);
-        var width = currentOptions.width == BgIframe.OPTION_AUTO || !currentOptions.width
+        var width = currentOptions.width == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "width")
             ? BgIframe.numberToPixels(element.offsetWidth)
             : BgIframe.numberToPixels(currentOptions.width);
-        var height = currentOptions.height == BgIframe.OPTION_AUTO || !currentOptions.height
+        var height = currentOptions.height == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "height")
             ? BgIframe.numberToPixels(element.offsetHeight)
             : BgIframe.numberToPixels(currentOptions.height);
         var iframe = document.createElement("iframe");
@@ -43,7 +43,13 @@ var BgIframe = (function () {
             element.parentNode.insertBefore(iframe, element);
         }
     };
+    BgIframe.isPropertyUndefined = function (options, property) {
+        return !(property in options) || typeof options[property] == "undefined";
+    };
     BgIframe.numberToPixels = function (value) {
+        if (typeof value == "undefined") {
+            return "0";
+        }
         if (typeof value === "number") {
             if (Number.isFinite(value)) {
                 return value.toString() + "px";

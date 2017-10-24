@@ -8,6 +8,7 @@ export interface BgIframeOptions {
 export declare class BgIframe {
     static readonly OPTION_AUTO: string;
     static addBgIframe(elementId?: string, options?: BgIframeOptions): void;
-    private static numberToPixels(value);
+    private static isPropertyUndefined(options, property);
+    private static numberToPixels(value?);
     private static isInternetExplorer();
 }
