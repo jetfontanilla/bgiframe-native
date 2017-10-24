@@ -27,16 +27,16 @@ export class BgIframe {
         };
         let currentOptions: BgIframeOptions = Object.assign({}, DEFAULT_OPTIONS, options);
 
-        let top = currentOptions.top == BgIframe.OPTION_AUTO || !currentOptions.top
+        let top = currentOptions.top == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "top")
             ? BgIframe.numberToPixels(0 - Math.round(element.clientTop || 0))
             : BgIframe.numberToPixels(currentOptions.top);
-        let left = currentOptions.left == BgIframe.OPTION_AUTO || !currentOptions.left
+        let left = currentOptions.left == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "left")
             ? BgIframe.numberToPixels(0 - Math.round(element.clientLeft || 0))
             : BgIframe.numberToPixels(currentOptions.left);
-        let width = currentOptions.width ==  BgIframe.OPTION_AUTO || !currentOptions.width
+        let width = currentOptions.width ==  BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "width")
             ? BgIframe.numberToPixels(element.offsetWidth)
             : BgIframe.numberToPixels(currentOptions.width);
-        let height = currentOptions.height ==  BgIframe.OPTION_AUTO || !currentOptions.height
+        let height = currentOptions.height ==  BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "height")
             ? BgIframe.numberToPixels(element.offsetHeight)
             : BgIframe.numberToPixels(currentOptions.height);
 
@@ -53,7 +53,15 @@ export class BgIframe {
         }
     }
 
-    private static numberToPixels(value: number | string): string {
+    private static isPropertyUndefined(options: BgIframeOptions, property: string) {
+        return !(property in options) || typeof options[property] == "undefined";
+    }
+
+    private static numberToPixels(value?: number | string): string {
+        if (typeof value == "undefined") {
+            return "0";
+        }
+
         if (typeof value === "number") {
             if (Number.isFinite(value)) {
                 return value.toString() + "px";
