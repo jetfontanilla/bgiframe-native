@@ -1,4 +1,4 @@
-[![npm version](https://badge.fury.io/js/bgiframe-native.svg)](https://badge.fury.io/js/bgiframe-native)
+[![npm version](https://badge.fury.io/js/bgiframe-native.svg)](https://www.npmjs.com/package/bgiframe-native)
 
 # bgiframe-native
 
