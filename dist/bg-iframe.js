@@ -3,13 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var BgIframe = (function () {
     function BgIframe() {
     }
-    BgIframe.addBgIframe = function (elementId, options) {
+    BgIframe.addBgIframe = function (querySelector, options) {
         if (options === void 0) { options = {}; }
-        if (!elementId || !BgIframe.isInternetExplorer()) {
+        if (!querySelector || !BgIframe.isInternetExplorer()) {
             return;
         }
-        var element = document.getElementById(elementId);
-        if (!element) {
+        var elements = document.body.querySelectorAll(querySelector);
+        if (!elements || !elements.length) {
             return;
         }
         var DEFAULT_OPTIONS = {
@@ -20,26 +20,33 @@ var BgIframe = (function () {
             src: "javascript:false;"
         };
         var currentOptions = Object.assign({}, DEFAULT_OPTIONS, options);
-        var top = currentOptions.top == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "top")
-            ? BgIframe.numberToPixels(0 - Math.round(element.clientTop || 0))
-            : BgIframe.numberToPixels(currentOptions.top);
-        var left = currentOptions.left == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "left")
-            ? BgIframe.numberToPixels(0 - Math.round(element.clientLeft || 0))
-            : BgIframe.numberToPixels(currentOptions.left);
-        var width = currentOptions.width == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "width")
-            ? BgIframe.numberToPixels(element.offsetWidth)
-            : BgIframe.numberToPixels(currentOptions.width);
-        var height = currentOptions.height == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "height")
-            ? BgIframe.numberToPixels(element.offsetHeight)
-            : BgIframe.numberToPixels(currentOptions.height);
-        var iframe = document.createElement("iframe");
-        if (currentOptions.src) {
-            iframe.src = currentOptions.src;
-        }
-        iframe.setAttribute("frameborder", "0");
-        iframe.setAttribute("tabindex", "-1");
-        iframe.setAttribute("style", "display:block;position:absolute;z-index:-1;top:" + top + ";left:" + left + ";width:" + width + ";height:" + height + ";opacity:0;");
-        if (element.parentNode) {
+        BgIframe.attachIframe(currentOptions, elements);
+    };
+    BgIframe.attachIframe = function (options, elements) {
+        for (var i = 0; i < elements.length; i++) {
+            var element = elements[i];
+            if (!element || !element.parentNode) {
+                continue;
+            }
+            var top_1 = options.top == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(options, "top")
+                ? BgIframe.numberToPixels(0 - Math.round(element.clientTop || 0))
+                : BgIframe.numberToPixels(options.top);
+            var left = options.left == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(options, "left")
+                ? BgIframe.numberToPixels(0 - Math.round(element.clientLeft || 0))
+                : BgIframe.numberToPixels(options.left);
+            var width = options.width == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(options, "width")
+                ? BgIframe.numberToPixels(element.offsetWidth)
+                : BgIframe.numberToPixels(options.width);
+            var height = options.height == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(options, "height")
+                ? BgIframe.numberToPixels(element.offsetHeight)
+                : BgIframe.numberToPixels(options.height);
+            var iframe = document.createElement("iframe");
+            if (options.src) {
+                iframe.src = options.src;
+            }
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("tabindex", "-1");
+            iframe.setAttribute("style", "display:block;position:absolute;z-index:-1;top:" + top_1 + ";left:" + left + ";width:" + width + ";height:" + height + ";opacity:0;");
             element.parentNode.insertBefore(iframe, element);
         }
     };

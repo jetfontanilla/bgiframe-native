@@ -9,13 +9,13 @@ export interface BgIframeOptions {
 export class BgIframe {
     static readonly OPTION_AUTO = "auto";
 
-    static addBgIframe(elementId?: string, options: BgIframeOptions = {}): void {
-        if (!elementId || !BgIframe.isInternetExplorer()) {
+    static addBgIframe(querySelector?: string, options: BgIframeOptions = {}): void {
+        if (!querySelector || !BgIframe.isInternetExplorer()) {
             return;
         }
 
-        let element = document.getElementById(elementId);
-        if (!element) {
+        let elements = document.body.querySelectorAll(querySelector);
+        if (!elements || !elements.length) {
             return;
         }
         const DEFAULT_OPTIONS: BgIframeOptions = {
@@ -27,28 +27,36 @@ export class BgIframe {
         };
         let currentOptions: BgIframeOptions = Object.assign({}, DEFAULT_OPTIONS, options);
 
-        let top = currentOptions.top == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "top")
-            ? BgIframe.numberToPixels(0 - Math.round(element.clientTop || 0))
-            : BgIframe.numberToPixels(currentOptions.top);
-        let left = currentOptions.left == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "left")
-            ? BgIframe.numberToPixels(0 - Math.round(element.clientLeft || 0))
-            : BgIframe.numberToPixels(currentOptions.left);
-        let width = currentOptions.width ==  BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "width")
-            ? BgIframe.numberToPixels(element.offsetWidth)
-            : BgIframe.numberToPixels(currentOptions.width);
-        let height = currentOptions.height ==  BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(currentOptions, "height")
-            ? BgIframe.numberToPixels(element.offsetHeight)
-            : BgIframe.numberToPixels(currentOptions.height);
+        BgIframe.attachIframe(currentOptions, elements as NodeListOf<HTMLElement>);
+    }
 
-        let iframe = document.createElement("iframe");
-        if (currentOptions.src) {
-            iframe.src = currentOptions.src;
-        }
-        iframe.setAttribute("frameborder", "0");
-        iframe.setAttribute("tabindex", "-1");
-        iframe.setAttribute("style", `display:block;position:absolute;z-index:-1;top:${top};left:${left};width:${width};height:${height};opacity:0;`);
+    private static attachIframe(options: BgIframeOptions, elements: NodeListOf<HTMLElement>): void {
+        for (let i = 0; i < elements.length; i++) {
+            let element = elements[i];
+            if (!element || !element.parentNode) {
+                continue;
+            }
 
-        if (element.parentNode) {
+            let top = options.top == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(options, "top")
+                ? BgIframe.numberToPixels(0 - Math.round(element.clientTop || 0))
+                : BgIframe.numberToPixels(options.top);
+            let left = options.left == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(options, "left")
+                ? BgIframe.numberToPixels(0 - Math.round(element.clientLeft || 0))
+                : BgIframe.numberToPixels(options.left);
+            let width = options.width == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(options, "width")
+                ? BgIframe.numberToPixels(element.offsetWidth)
+                : BgIframe.numberToPixels(options.width);
+            let height = options.height == BgIframe.OPTION_AUTO || BgIframe.isPropertyUndefined(options, "height")
+                ? BgIframe.numberToPixels(element.offsetHeight)
+                : BgIframe.numberToPixels(options.height);
+
+            let iframe = document.createElement("iframe");
+            if (options.src) {
+                iframe.src = options.src;
+            }
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("tabindex", "-1");
+            iframe.setAttribute("style", `display:block;position:absolute;z-index:-1;top:${top};left:${left};width:${width};height:${height};opacity:0;`);
             element.parentNode.insertBefore(iframe, element);
         }
     }

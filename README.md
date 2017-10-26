@@ -13,10 +13,12 @@ native implementation of the jQuery bgiframe plugin: https://github.com/brandona
 var bgIframe = require("bgiframe-native");
 
 // basic
-bgIframe.addBgIframe("ElementIdContainingFlash1");
+bgIframe.addBgIframe("elementName");
+bgIframe.addBgIframe("#elementId");
+bgIframe.addBgIframe(".className");
 
 // more advanced usage using options
-bgIframe.addBgIframe("ElementIdContainingFlash2", {width: "600px", height: "400px"});
+bgIframe.addBgIframe("#elementId", {width: "600px", height: "400px"});
 
 ```
 ## Options
@@ -26,8 +28,3 @@ bgIframe.addBgIframe("ElementIdContainingFlash2", {width: "600px", height: "400p
 * `width` *(number | string)*: This is the width of the iframe. If a number is used here, pixels will be assume. Otherwise, be sure to specify a unit. An expression could also be used. By default the value is "auto" which will the offsetWidth of the element. If a number is passed, unit used will be in pixels.
 * `height` *(number | string)*: This is the height of the iframe. If a number is used here, pixels will be assume. Otherwise, be sure to specify a unit. An expression could also be used. By default the value is "auto" which will use the offsetHeight of the element. If a number is passed, unit used will be in pixels.
 * `src` *(string)*: This setting is provided so that one could change  the src of the iframe to whatever they need. Default: "javascript:false;"
-
-
-## TODOs
-
-* only supports elementID for now, will add class selectors for next release
