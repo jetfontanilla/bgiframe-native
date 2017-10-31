@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/bgiframe-native.svg)](https://www.npmjs.com/package/bgiframe-native)
+
 # bgiframe-native
 
 native implementation of the jQuery bgiframe plugin: https://github.com/brandonaaron/bgiframe
