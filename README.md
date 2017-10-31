@@ -11,7 +11,7 @@ native implementation of the jQuery bgiframe plugin: https://github.com/brandona
 
 ## Usage
 
-#JavaScript
+### JavaScript
    ```javascript
    var bgIframe = require("bgiframe-native");
    
@@ -25,7 +25,7 @@ native implementation of the jQuery bgiframe plugin: https://github.com/brandona
    
    ```
    
-#TypeScript
+### TypeScript
    ```typecript
    import { BgIframe } from "bgiframe-native";
    
