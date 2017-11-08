@@ -13,3 +13,4 @@ export declare class BgIframe {
     private static numberToPixels(value?);
     private static isInternetExplorer();
 }
+export default BgIframe;

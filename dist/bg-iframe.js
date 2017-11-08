@@ -76,4 +76,5 @@ var BgIframe = (function () {
     return BgIframe;
 }());
 exports.BgIframe = BgIframe;
+exports.default = BgIframe;
 //# sourceMappingURL=bg-iframe.js.map

@@ -90,3 +90,5 @@ export class BgIframe {
     }
 
 }
+
+export default BgIframe;
