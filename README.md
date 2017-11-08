@@ -46,5 +46,5 @@
 
 
 
-###Attribution
+### Attribution
 this project is based on the native implementation of the jQuery bgiframe plugin: https://github.com/brandonaaron/bgiframe
