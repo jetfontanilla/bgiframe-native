@@ -1,7 +1,7 @@
 {
   "name": "bgiframe-native",
   "version": "2.0.2",
-  "description": "native implementation for bgiframe",
+  "description": "make flash and other objects obey IE z-index. native implementation with no added dependencies",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
