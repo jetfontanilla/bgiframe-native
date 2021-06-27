@@ -2,6 +2,9 @@
 
 # bgiframe-native
 
+## Archive Notice:
+* since Flash has been deprecated on all major browsers and support has been limited to a very small subset, I will be archiving this project
+
 ## Why/When should I use it?
 * You're still working with problematic elements in IE (flash objects, etc) that makes the element not obey the document's z-index
 * no need for a jQuery dependency, or any other node dependencies
